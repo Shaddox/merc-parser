@@ -5,9 +5,13 @@
 import mercari
 import yaml
 
+import database
+
+
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
 
 def config_read():
     with open("config.yaml", "r", encoding="utf-8") as f:
@@ -19,10 +23,21 @@ if __name__ == '__main__':
     print_hi('PyCharm')
     config = config_read()
     print(config)
-    for searchTerm in config['keywords']:
-        for item in mercari.search(searchTerm):
-            print(item.productName)
-            print("{}, {}".format(item.productName, item.productURL))
+    dbConnection = database.create_connection(config['database_name'])
+    dbCursor = database.get_cursor(dbConnection)
+    database.provision_db(dbConnection, dbCursor)
+    for keyword in config['keywords']:
+        print(keyword)
+        currentBatchId = database.get_batch_id_for_keyword(dbConnection, dbCursor, keyword)
+        productsForKeyword = mercari.search(keyword)
+        database.insert_products(dbConnection, dbCursor, keyword, productsForKeyword, currentBatchId)
+
+
+        # for item in mercari.search(searchTerm):
+        #     print(vars(item))
+        #     print(item.productName)
+        #     print("{}, {}".format(item.productName, item.productURL))
+        #     break
 
     print("Search ended.")
 
