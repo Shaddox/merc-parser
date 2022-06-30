@@ -11,4 +11,5 @@ You will be emailed (or have logs) of the new items that come from time to time.
 3. Clone this repository `git clone https://github.com/Shaddox/merc-parser.git`
 4. `pip3 install requirements.txt`
 5. Copy (or rename) the example configuration file `cp config.yaml.example config.yaml`
-6. Configure the script to your liking and let it run
+6. Configure the script to your liking
+7. Run it! `python3 main.py`
