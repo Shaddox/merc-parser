@@ -24,7 +24,7 @@ def provision_db(conn, cursor):
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS products(
     [id] INTEGER PRIMARY KEY,
-    [mercariId] INTEGER,
+    [mercariId] TEXT,
     [keyword] TEXT,
     [name] TEXT,
     [productURL] TEXT,
@@ -106,7 +106,7 @@ def find_new_products_for_keyword(cursor, keyword, batchId):
         "keyword": keyword,
         "currentBatchId": batchId,
         "oldBatchId": batchId - 1
-    }).fetchAll()
+    }).fetchall()
 
     return newProducts
 
@@ -116,5 +116,10 @@ def find_new_products_for_all_keywords(cursor):
     INNER JOIN latest_batch_ids b1 ON 
     (p1.batchId = b1.batchId and p1.keyword = b1.keyword)
     WHERE b1.batchId != 0 
-    ''').fetchAll()
+    EXCEPT
+    SELECT mercariId, name, productURL, imageURL, price, status, soldOut FROM products p2
+    INNER JOIN latest_batch_ids b2 ON 
+    (p2.batchId = b2.batchId-1 AND p2.keyword = b2.keyword)
+    WHERE b2.batchId != 0 
+    ''').fetchall()
     return newProducts
