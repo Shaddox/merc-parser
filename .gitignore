@@ -3,3 +3,4 @@ venv
 config.yaml
 *.db
 __pycache__
+logs
