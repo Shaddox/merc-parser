@@ -1,2 +1,30 @@
 keywords:
   - "モワティエ"
+  - "super real mahjong"
+  - "mahjong"
+
+email:
+  want: true
+  smtp_server: smtp.gmail.com
+  smtp_port: 465
+  sender_email: your-email+merc@gmail.com
+  # optional, but will be asked for later, for google, it needs to be an app password
+  # see: https://support.google.com/accounts/answer/185833?visit_id=637922054041786857-1420196120&p=InvalidSecondFactor&rd=1
+  sender_email_password: yourPassword
+  receiver_email: your-email@gmail.com
+
+logs:
+  want: false
+  #note the trailing slash: this is a directory
+  path: C:\logs\
+
+timeouts:
+  #values in seconds
+  #break to take between each keyword
+  lower_bound_keyword_search: 30
+  upper_bound_keyword_search: 60
+  #break to take between each full cycle
+  lower_bound_search: 3500
+  upper_bound_search: 3600
+
+database_name: mercari_items.db
