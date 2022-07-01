@@ -6,7 +6,7 @@ You will be emailed (or have logs) of the new items that come from time to time.
 
 ## Instructions
 
-1. Install python (this was developed on 3.10.9)
+1. Install python (this was developed on 3.10.5)
 2. Clone this repository `git clone https://github.com/Shaddox/merc-parser.git`
 3. (Optional) Create a venv in the project directory `python3 -m venv .`
 4. (Optional) Activate venv `<venv>\Scripts\activate.bat`
