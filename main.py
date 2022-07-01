@@ -28,7 +28,8 @@ if __name__ == '__main__':
 
     while True:
         print("Iteration starting...")
-        breakBetweenKeywords = random.randint(config['lower_bound_keyword_search'], config['upper_bound_keyword_search'])
+        breakBetweenKeywords = random.randint(config['timeouts']['lower_bound_keyword_search'],
+                                              config['timeouts']['upper_bound_keyword_search'])
         for keyword in config['keywords']:
             print(keyword)
             currentBatchId = database.get_batch_id_for_keyword(dbConnection, dbCursor, keyword)
@@ -43,6 +44,6 @@ if __name__ == '__main__':
         if config["logs"]["want"] and allNewProducts:
             html_logger.create_html_log(allNewProducts, config["logs"]["path"])
         print("Iteration ended")
-        breakBetweenIterations = random.randint(config['lower_bound_search'], config['upper_bound_search'])
+        breakBetweenIterations = random.randint(config['timeouts']['lower_bound_search'],
+                                                config['timeouts']['upper_bound_search'])
         time.sleep(breakBetweenIterations)
-
