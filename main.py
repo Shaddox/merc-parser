@@ -38,8 +38,12 @@ if __name__ == '__main__':
                 database.insert_products(dbConnection, dbCursor, keyword, productsForKeyword, currentBatchId)
             except BaseException as e:
                 print(e)
+                print("Error with keyword " + keyword)
                 print("Reverting batch ID...")
                 database.revert_batchId_for_keyword(dbConnection, dbCursor, keyword, currentBatchId)
+                time.sleep(breakBetweenKeywords)
+                # Start over on the next keyword ...
+                continue
 
             time.sleep(breakBetweenKeywords)
 
