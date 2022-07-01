@@ -33,8 +33,14 @@ if __name__ == '__main__':
         for keyword in config['keywords']:
             print(keyword)
             currentBatchId = database.get_batch_id_for_keyword(dbConnection, dbCursor, keyword)
-            productsForKeyword = mercari.search(keyword)
-            database.insert_products(dbConnection, dbCursor, keyword, productsForKeyword, currentBatchId)
+            try:
+                productsForKeyword = mercari.search(keyword)
+                database.insert_products(dbConnection, dbCursor, keyword, productsForKeyword, currentBatchId)
+            except BaseException as e:
+                print(e)
+                print("Reverting batch ID...")
+                database.revert_batchId_for_keyword(dbConnection, dbCursor, keyword, currentBatchId)
+
             time.sleep(breakBetweenKeywords)
 
         allNewProducts = database.find_new_products_for_all_keywords(dbCursor)

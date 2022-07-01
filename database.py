@@ -74,6 +74,28 @@ def get_batch_id_for_keyword(connection, cursor, keyword):
     print(result)
     return result
 
+def revert_batchId_for_keyword(conn, cursor, keyword, batchId):
+    if batchId == 0:
+        cursor.execute('''
+        DELETE FROM latest_batch_ids
+        WHERE batchId = :oldBatchId AND keyword = :keyword
+        ''', {
+            "oldBatchId": batchId,
+            "keyword": keyword
+        })
+        conn.commit()
+        return
+    correctBatchId = batchId - 1
+    cursor.execute('''UPDATE latest_batch_ids SET
+        batchId = :newBatchId
+        WHERE batchId = :oldBatchId AND keyword = :keyword
+        ''', {
+            "newBatchId": correctBatchId,
+            "oldBatchId": batchId,
+            "keyword": keyword
+        })
+    conn.commit()
+    return
 
 def insert_products(connection, cursor, keyword, products, batchId):
     for product in products:
