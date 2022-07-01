@@ -27,6 +27,7 @@ if __name__ == '__main__':
     database.provision_db(dbConnection, dbCursor)
 
     while True:
+        print("Iteration starting...")
         breakBetweenKeywords = random.randint(config['lower_bound_keyword_search'], config['upper_bound_keyword_search'])
         for keyword in config['keywords']:
             print(keyword)

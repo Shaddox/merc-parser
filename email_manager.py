@@ -12,7 +12,7 @@ def build_and_send_email_with_new_stuff(email_config, allNewProducts):
         password = email_config['sender_email_password']
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = "multipart test"
+    message["Subject"] = "I spotted some new items!"
     message["From"] = sender_email
     message["To"] = receiver_email
 
