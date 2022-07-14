@@ -4,6 +4,8 @@ Hello,
 This is a simple script to watch over a list of keywords on the japanese marketplace mercari. 
 You will be emailed (or have logs) of the new items that come from time to time.
 
+Just download the latest release or, alternatively...
+
 ## Instructions
 
 1. Install python (this was developed on 3.10.5)
