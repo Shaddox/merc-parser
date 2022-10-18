@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 def create_html_log(allNewProducts, path):
     html = """\
         <html>

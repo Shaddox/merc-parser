@@ -18,3 +18,4 @@ Or, alternatively...
 6. Copy (or rename) the example configuration file `cp config.yaml.example config.yaml`
 7. Configure the script to your liking
 8. Run it! `python3 main.py`
+
